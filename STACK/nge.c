@@ -43,7 +43,7 @@ int main()
 	int arr1[]={0,1,2};
 	int n=3;
 	int arr2[n];
-	voinxtgrt(arr1,n,arr2);
+	nxtgrt(arr1,n,arr2);
 	printf("[");
 	for(j=0;j<n;j++)
 	{
