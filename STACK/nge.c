@@ -40,7 +40,7 @@ void nxtgrt(int *nums,int n,int *nge)
 int main()
 {   
   int j;
-	int arr1[]={0,1,2};
+	int arr1[]={4,25,25,1};
 	int n=3;
 	int arr2[n];
 	nxtgrt(arr1,n,arr2);
