@@ -1,107 +1,171 @@
+//minimum
 #include<stdio.h>
-#include<conio.h>
-int top=-1,top2=-1;
-void push1(int s1[],int size,int ele)
+//#include<conio.h>
+#include<stdlib.h>
+#include<string.h>
+#define size 5
+
+int top1=-1;
+int top2=-1;
+int m1[size];
+int m2[size];
+int isempty1()
 {
-	if(top==size-1)
-	printf("\n stack overflow");
-	else
-	{
-		top++;
-		s1[top]=ele;
-		printf("\n%d",top);
-	}
+ if(top1==-1)
+ {
+  return 1;
+ }
+ else
+ {
+  return 0;
+ }
 }
-void push2(int s2[],int ele,int size)
+
+
+
+int isfull1()
 {
-	if(top2==size-1)
-	printf("\n stack2 overflow");
-	if(top2==-1)
-	{
-		top2++;
-		s2[top2]=ele;
-	}
-	else
-	{
-		if(ele<s2[top])
-		{
-			top2++;
-			printf("\n %d tope",top2);
-			s2[top2]=ele;
+ if(top1==size-1)
+ {
+  return 1;
+ }
+ else
+ {
+  return 0;
+ }
 }
-	}
-}
-int pop2(int s2[])
+
+int push1(int a)
 {
-	int a2;
-	if(top2==-1)
-	printf("\n stack2 underflow");
-	else
-	{
-		a2=s2[top2];
-		top2--;
-	}
-	return a2;
+ if(isfull1())
+ {
+  printf("stack is full");
+ }
+ else
+ {
+  top1++;
+ m1[top1]=a;
+ }
 }
-int pop(int s1[],int s2[])
+
+
+int pop1()
 {
-	int a1;
-	if(top==-1)
-	printf("\n stack underflow");
-	else
-	{
-		a1=s1[top];
-		top--;
-		pop2(s2);
-	}
-	return a1;
+ if(isempty1())
+ {
+  printf(" \n n-stack is empty");
+ }
+ else
+ {
+  top1--;
+  return m1[top1+1];
+ }
 }
-int peek2(int s2[])
+
+
+int isempty2()
 {
-	if(top2==-1)
-	printf("\n stack2 underflow");
-	return s2[top2];
+ if(top2==-1)
+ {
+  return 1;
+ }
+ else
+ {
+  return 0;
+ }
 }
-int peek1(int s1[])
+
+
+
+int isfull2()
 {
-	if(top==-1)
-	printf("\n stack underflow");
-	printf("\n %d",top);
-	return s1[top];
+ if(top2==size-1)
+ {
+  return 1;
+ }
+ else
+ {
+  return 0;
+ }
 }
+
+int push2(int a)
+{
+ if(isfull2())
+ {
+  printf("stack is full");
+ }
+ else
+ {
+  top2++;
+  m2[top2]=a;
+ }
+}
+
+
+int pop2()
+{
+ if(isempty2())
+ {
+  printf("\n m-stack is empty");
+  //return;
+ }
+ else
+ {
+  top2--;
+  return m2[top2+1];
+ }
+}
+int min()
+{
+ return m2[top2];
+}
+int peek()
+{
+ return m1[top1];
+}
+
 int main()
 {
-	int size,ele,c,del,see1,see2;
-	printf("\n enter the size of the stack:");
-	scanf("\n%d",&size);
-	int s1[size],s2[size];
-	printf("\n 1->push\n 2->pop\n3->peek\n4->peek2");
-	while(1)
-	{
-		printf("\n enter the choice :");
-	scanf("\n%d",&c);
-		switch(c)
-		{
-			case 1:
-				printf("\n enter the element to push in the stack:");
-				scanf("\n%d",&ele);
-				push1(s1,size,ele);
-				push2(s2,ele,size);
-				break;
-			case 2:
-				del=pop(s1,s2);
-				printf("\n deleted element from the stack is :%d",del);
-				break;
-			case 3:
-				see1=peek1(s1);
-				printf("\n latest pushing element is :%d",see1);
-				break;
-			case 4:
-				see2=peek2(s2);
-				printf("\n the minimum element in the stack:%d",see2);
-				break;
-			default:
-				printf("\n in");
-		}
-	}
+ int i;
+ int choice,data,temp;
+ do{
+
+ printf("\n ENTER CHOICE :");
+ scanf("%d",&choice);
+ switch(choice)
+ {
+  case 1:
+   printf("\n ELEMENT TO BE PUSHED :");
+   scanf("%d",&data);
+   push1(data);
+   if(isempty2()||m1[top1]<m2[top2])
+   {
+    push2(data);
+   }
+   break;
+  case 2:
+   if(isempty1()&&isempty2())
+    printf("\n stack is empty");
+   else{
+   if(m1[top1]==m2[top2])
+   {
+          pop2();
+   }  
+   temp=m1[top1];
+   pop1();
+   printf("\n POPPED ELEMENT IS %d",temp);}
+   break;
+  case 3:
+         printf("\nminimum value %d",min());
+         break;
+  default:
+           printf("invalid");
+    
+ }
+ 
+ }while(choice!=4);
+ 
+ 
+return 0; 
 }
